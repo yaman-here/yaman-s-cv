@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ece7dc">
+<title>Mohammed Yaman Asaad — Computer Science Graduate</title>
+<meta name="description" content="Portfolio of Mohammed Yaman Asaad, Computer Science graduate from Taibah University, Medina. Java, Python, C/C++, system analysis and software architecture.">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@dawod/thmanyah-font-web/index.css">
+<style>
+:root{
+  --paper:#ece7dc; --paper2:#e2dccf; --ink:#0c0c0c; --red:#e4301c;
+  --display:"Arial Black","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --body:"Helvetica Neue",Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,"SFMono-Regular",Menlo,Consolas,"Courier New",monospace;
+  --pad:clamp(16px,4vw,56px); --hh:60px;
+}
+html[lang="ar"]{
+  --display:"Thmanyah Serif Display","Thmanyah Sans","Segoe UI","Noto Naskh Arabic","Tahoma",Arial,sans-serif;
+  --body:"Thmanyah Sans","Segoe UI","Noto Sans Arabic","Tahoma",Arial,sans-serif;
+  --mono:"Thmanyah Sans","Segoe UI","Noto Sans Arabic","Tahoma",Arial,sans-serif;
+  --text:"Thmanyah Serif Text","Thmanyah Sans","Segoe UI","Noto Naskh Arabic","Tahoma",Arial,sans-serif;
+}
+/* Arabic: Serif Text for reading paragraphs, Sans for UI, Serif Display for headlines; slightly larger small text */
+html[lang="ar"] .hero-sub,html[lang="ar"] .hudbox p,html[lang="ar"] .cdesc,html[lang="ar"] .xp p,html[lang="ar"] .step p,html[lang="ar"] .step li{font-family:var(--text);font-weight:400}
+html[lang="ar"] .hero-sub{font-size:clamp(1.1rem,1.7vw,1.3rem)}
+html[lang="ar"] .hudbox p,html[lang="ar"] .step p,html[lang="ar"] .step li{font-size:.98rem;line-height:1.9}
+html[lang="ar"] .cdesc,html[lang="ar"] .xp p{font-size:1.05rem;line-height:1.85}
+html[lang="ar"] .label,html[lang="ar"] .hud,html[lang="ar"] .slab,html[lang="ar"] .ctop,html[lang="ar"] .cfoot,html[lang="ar"] .tag,html[lang="ar"] .hudbox .hl,html[lang="ar"] .cell .k,html[lang="ar"] .step .tag,html[lang="ar"] .langs b{font-size:.85rem;font-weight:500}
+html[lang="ar"] .dsc,html[lang="ar"] .chip,html[lang="ar"] .langs,html[lang="ar"] footer,html[lang="ar"] .btn{font-size:.92rem;font-weight:500}
+html[lang="ar"] .tk{font-size:.9rem;font-weight:500}
+html[lang="ar"] .hdr nav a{font-size:.95rem;font-weight:500}
+html[lang="ar"] .lang button{font-size:.9rem;font-weight:700}
+html[lang="ar"] .xp .tag{font-weight:700}
+html[lang="ar"] body{font-weight:400}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--hh) + 8px);-webkit-text-size-adjust:100%;overflow-x:clip}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;overflow-x:clip;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:90;opacity:.16;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .7 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+img,svg{display:block;max-width:100%}
+a{color:inherit}
+h1,h2,h3,p,ol,ul{margin:0}
+ol,ul{padding:0;list-style:none}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--red);outline-offset:3px}
+.mono{font-family:var(--mono)}
+.ltr{direction:ltr;unicode-bidi:isolate;display:inline-block}
+.red{color:var(--red)}
+.skip{position:fixed;inset-inline-start:12px;top:-60px;z-index:200;background:var(--ink);color:var(--paper);padding:.7em 1em;font-family:var(--mono);transition:top .2s}
+.skip:focus{top:12px}
+html[dir="rtl"] *{letter-spacing:0 !important;text-transform:none !important}
+
+/* progress + cursor */
+#prog{position:fixed;top:0;inset-inline-start:0;height:3px;width:100%;background:var(--red);transform:scaleX(0);transform-origin:left;z-index:120}
+html[dir="rtl"] #prog{transform-origin:right}
+#cur{position:fixed;left:0;top:0;width:30px;height:30px;margin:-15px 0 0 -15px;border:1.5px solid var(--red);border-radius:50%;pointer-events:none;z-index:150;opacity:0;transition:opacity .3s,width .2s,height .2s,margin .2s,background .2s}
+#cur::before,#cur::after{content:"";position:absolute;background:var(--red)}
+#cur::before{left:50%;top:-8px;bottom:-8px;width:1px}
+#cur::after{top:50%;left:-8px;right:-8px;height:1px}
+#cur.big{width:54px;height:54px;margin:-27px 0 0 -27px;background:rgba(228,48,28,.12)}
+@media (hover:none),(pointer:coarse){#cur{display:none}}
+
+/* شغال ها ، حاول تفهم هههههههههه */
+/* header */
+.hdr{position:fixed;top:0;inset-inline:0;height:var(--hh);z-index:100;display:flex;align-items:center;gap:1rem;padding-inline:var(--pad);background:rgba(236,231,220,.94);backdrop-filter:blur(6px);border-bottom:1.5px solid var(--ink)}
+.logo{display:flex;align-items:center;gap:6px;text-decoration:none;font-family:var(--display);font-weight:900;font-size:1.25rem;letter-spacing:-.04em}
+.logo-mark{background:var(--ink);color:var(--paper);padding:.1em .35em}
+.logo-dot{width:10px;height:10px;background:var(--red);border-radius:50%;animation:pulse 1.6s infinite}
+@keyframes pulse{50%{transform:scale(.55);opacity:.5}}
+.hdr nav{flex:1;display:flex;justify-content:center;gap:clamp(.8rem,2vw,2rem)}
+.hdr nav a{font-family:var(--mono);font-size:.75rem;text-transform:uppercase;letter-spacing:.12em;text-decoration:none;padding:.4em 0;position:relative}
+.hdr nav a::after{content:"";position:absolute;inset-inline:0;bottom:0;height:2px;background:var(--red);transform:scaleX(0);transition:transform .25s;transform-origin:left}
+html[dir="rtl"] .hdr nav a::after{transform-origin:right}
+.hdr nav a:hover::after,.hdr nav a:focus-visible::after{transform:scaleX(1)}
+.lang{display:flex;border:1.5px solid var(--ink)}
+.lang button{background:transparent;border:0;padding:.4em .8em;cursor:pointer;font-family:var(--mono);font-size:.75rem;letter-spacing:.08em;min-height:34px}
+.lang button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.lang button:not([aria-pressed="true"]):hover{background:var(--red);color:#fff}
+.burger{display:none;width:42px;height:38px;border:1.5px solid var(--ink);background:transparent;cursor:pointer;position:relative}
+.burger span{position:absolute;inset-inline:9px;height:2px;background:var(--ink);transition:transform .25s,top .25s}
+.burger span:nth-child(1){top:12px}.burger span:nth-child(2){top:22px}
+.hdr.open .burger span:nth-child(1){top:17px;transform:rotate(45deg)}
+.hdr.open .burger span:nth-child(2){top:17px;transform:rotate(-45deg)}
+@media (max-width:900px){
+  .burger{display:block}
+  .hdr{justify-content:space-between}
+  .logo{margin-inline-end:auto}
+  .hdr nav{display:none;position:fixed;top:var(--hh);inset-inline:0;flex-direction:column;justify-content:flex-start;gap:0;background:var(--paper);border-bottom:1.5px solid var(--ink);padding:.5rem var(--pad) 1.2rem}
+  .hdr.open nav{display:flex}
+  .hdr nav a{font-size:1.1rem;padding:.9em 0;border-bottom:1px solid rgba(12,12,12,.25)}
+}
+
+/* generic */
+section{position:relative}
+.wrap{padding-inline:var(--pad)}
+.sec-head{padding:clamp(40px,7vw,90px) var(--pad) clamp(18px,3vw,32px);display:flex;flex-direction:column;gap:.8rem}
+.label{font-family:var(--mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.16em;display:flex;align-items:center;gap:.7rem}
+.label::before{content:"";width:28px;height:2px;background:var(--red)}
+.h2{font-family:var(--display);font-weight:900;text-transform:uppercase;font-size:clamp(2.3rem,7vw,6rem);line-height:.92;letter-spacing:-.045em;overflow-wrap:anywhere}
+html[lang="ar"] .h2,html[lang="ar"] .display,html[lang="ar"] .nameh{line-height:1.2}
+.btn{display:inline-flex;align-items:center;gap:.7em;min-height:48px;padding:.8em 1.3em;border:2px solid var(--ink);background:var(--ink);color:var(--paper);font-family:var(--mono);font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;text-decoration:none;cursor:pointer;transition:transform .2s,box-shadow .2s,background .2s,color .2s}
+.btn:hover,.btn:focus-visible{transform:translate(-3px,-3px);box-shadow:5px 5px 0 var(--red)}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn.red{background:var(--red);border-color:var(--red);color:#fff}
+.btn.red:hover{box-shadow:5px 5px 0 var(--ink)}
+.btn svg{width:18px;height:18px;transition:transform .25s}
+.btn:hover svg{transform:translateX(4px)}
+html[dir="rtl"] .btn svg{transform:scaleX(-1)}
+html[dir="rtl"] .btn:hover svg{transform:scaleX(-1) translateX(4px)}
+.rv{opacity:1}
+html.js .rv{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s ease}
+html.js .rv.in{opacity:1;transform:none}
+
+/* hero */
+.hero{padding:calc(var(--hh) + clamp(20px,4vw,50px)) var(--pad) clamp(30px,5vw,60px);overflow:hidden}
+.hero-grid{display:grid;gap:1.5rem;grid-template-columns:1fr;align-items:center}
+@media (min-width:900px){.hero-grid{grid-template-columns:1.2fr 1fr}}
+.display{font-family:var(--display);font-weight:900;text-transform:uppercase;font-size:clamp(3rem,14.5vw,5.6rem);line-height:.86;letter-spacing:-.05em}
+@media (min-width:900px){.display{font-size:clamp(4rem,8.3vw,9rem)}}
+.display span{display:block}
+.display .l2{margin-inline-start:.04em}
+.hud{margin-top:1.4rem;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;line-height:1.8;border-inline-start:2px solid var(--red);padding-inline-start:.9rem}
+.blink::after{content:"";display:inline-block;width:.6em;height:1em;background:var(--red);margin-inline-start:.4em;vertical-align:-.15em;animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:0}}
+.hero-sub{margin-top:1.1rem;max-width:34rem;font-size:clamp(1rem,1.5vw,1.15rem)}
+.cta-row{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:1.5rem}
+.hero-art{position:relative;min-height:240px}
+.hero-art svg{width:100%;height:auto;animation:float 6s ease-in-out infinite}
+/* صدقني ما ادري كيف اشتغل ولكن دامه يشتغل اتركه */
+@keyframes float{50%{transform:translateY(-12px)}}
+.plus-m{position:absolute;width:26px;height:26px;color:var(--red)}
+.plus-m::before,.plus-m::after{content:"";position:absolute;background:currentColor}
+.plus-m::before{left:50%;top:0;bottom:0;width:2px;margin-left:-1px}
+.plus-m::after{top:50%;left:0;right:0;height:2px;margin-top:-1px}
+.plus-m.a{top:0;inset-inline-end:0}
+.ruler{position:absolute;inset-inline-end:calc(var(--pad)/2 - 4px);top:30%;height:32%;width:14px;background:repeating-linear-gradient(0deg,var(--ink) 0 1px,transparent 1px 8px);opacity:.55}
+.barcode{position:absolute;inset-inline-end:var(--pad);bottom:8%;width:46px;height:52px;background:repeating-linear-gradient(90deg,var(--ink) 0 2px,transparent 2px 4px,var(--ink) 4px 5px,transparent 5px 8px);opacity:.8}
+@media (max-width:899px){.ruler,.barcode{display:none}}
+
+/* name band */
+.band{background:var(--ink);color:var(--paper);overflow:hidden}
+.nameh{font-family:var(--display);font-weight:900;text-transform:uppercase;text-align:center;font-size:clamp(2.2rem,7.6vw,8rem);letter-spacing:-.045em;line-height:.95;padding:clamp(22px,3.5vw,48px) var(--pad);overflow-wrap:anywhere}
+.nameh em{font-style:normal;color:var(--red)}
+.band .mq{border-top:1px solid rgba(236,231,220,.35);padding:.7rem 0}
+.tk{font-family:var(--mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.35em;padding-inline:2.2rem;white-space:nowrap;color:rgba(236,231,220,.85)}
+
+/* ابو يمان لا تلمس هالسطر، كل ما حركته الموقع زعل */
+/* marquee */
+.mq{overflow:hidden;direction:ltr}
+.trk{display:flex;width:max-content;animation:mq 45s linear infinite}
+.mq.rev .trk{animation-direction:reverse}
+.mq.fast .trk{animation-duration:30s}
+.grp{display:flex;flex:none;align-items:center}
+@keyframes mq{to{transform:translateX(-50%)}}
+.mq span{unicode-bidi:isolate}
+
+/* skills rows */
+.rows{border-top:1.5px solid var(--ink);margin-inline:var(--pad)}
+.row{position:relative;display:grid;grid-template-columns:4.5rem minmax(0,1.1fr) minmax(0,1.5fr) auto 2.6rem;align-items:center;gap:1rem;padding:1.25rem .5rem;border-bottom:1.5px solid var(--ink);isolation:isolate;transition:color .3s}
+.row::before{content:"";position:absolute;inset:0;background:var(--ink);transform:scaleY(0);transform-origin:bottom;transition:transform .35s cubic-bezier(.2,.8,.2,1);z-index:-1}
+.row:hover,.row:focus-within{color:var(--paper)}
+.row:hover::before,.row:focus-within::before{transform:scaleY(1)}
+.num{font-family:var(--display);font-weight:900;font-size:clamp(1.2rem,2.4vw,2rem);letter-spacing:-.03em}
+.num i{font-style:normal;color:var(--red);margin-inline-start:.25em}
+.ttl{font-family:var(--display);font-weight:900;text-transform:uppercase;font-size:clamp(1.5rem,3.6vw,3rem);line-height:1;letter-spacing:-.04em;overflow-wrap:anywhere}
+.dsc{font-family:var(--mono);font-size:.75rem;line-height:1.6}
+.chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.6rem}
+.chip{border:1px solid currentColor;padding:.2em .6em;font-family:var(--mono);font-size:.72rem;line-height:1.5}
+.code{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;opacity:.8}
+.pl{width:28px;height:28px;border:1.5px solid currentColor;border-radius:50%;position:relative;transition:transform .3s}
+.pl::before,.pl::after{content:"";position:absolute;background:currentColor;top:50%;left:50%;transform:translate(-50%,-50%)}
+.pl::before{width:12px;height:1.5px}.pl::after{width:1.5px;height:12px}
+.row:hover .pl{transform:rotate(90deg);color:var(--red)}
+@media (max-width:800px){
+  .row{grid-template-columns:3rem minmax(0,1fr) 2.2rem;gap:.5rem .8rem;padding:1.1rem .2rem}
+  .dsc{grid-column:2 / 4}
+  .code{display:none}
+}
+
+/* statement */
+.state{background:var(--ink);color:var(--paper);margin-top:clamp(40px,7vw,90px);overflow:hidden}
+.state-grid{display:grid;grid-template-columns:1fr;gap:2rem;padding:clamp(30px,5vw,70px) var(--pad);align-items:center}
+@media (min-width:900px){.state-grid{grid-template-columns:1.1fr 1fr}}
+.shout{font-family:var(--display);font-weight:900;text-transform:uppercase;font-size:clamp(2.2rem,6.4vw,5.6rem);line-height:.92;letter-spacing:-.05em}
+.shout .r{color:var(--red)}
+.hudbox{position:relative;border:1px solid rgba(236,231,220,.55);padding:1.2rem;background:rgba(236,231,220,.03)}
+.hudbox .hl{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--red);margin-bottom:.7rem;display:flex;justify-content:space-between;gap:1rem}
+.hudbox p{font-family:var(--mono);font-size:.82rem;line-height:1.75}
+.bp{margin-top:1.2rem;width:100%;height:auto;color:rgba(236,231,220,.7)}
+.spin{transform-origin:200px 120px;animation:spin 28s linear infinite}
+.spin.r{animation-direction:reverse;animation-duration:18s}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(2,1fr);border-bottom:1.5px solid var(--ink)}
+@media (min-width:900px){.stats{grid-template-columns:repeat(4,1fr)}}
+.stat{padding:clamp(20px,3vw,38px) var(--pad);border-inline-end:1.5px solid var(--ink);border-top:1.5px solid var(--ink)}
+.stat:nth-child(2n){border-inline-end:0}
+@media (min-width:900px){.stat{border-top:0;border-inline-end:1.5px solid var(--ink)}.stat:nth-child(2n){border-inline-end:1.5px solid var(--ink)}.stat:last-child{border-inline-end:0}}
+.snum{font-family:var(--display);font-weight:900;font-size:clamp(2.3rem,6vw,5rem);letter-spacing:-.05em;line-height:1;direction:ltr;unicode-bidi:isolate;display:block}
+.snum small{font-size:.38em;letter-spacing:0;margin-inline-start:.15em;color:var(--red)}
+html[dir="rtl"] .snum{text-align:right}
+.slab{font-family:var(--mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;margin-top:.6rem;display:block;line-height:1.6}
+
+/* projects */
+.cards{display:grid;grid-template-columns:1fr;gap:1.2rem;padding:0 var(--pad) clamp(40px,6vw,80px)}
+@media (min-width:900px){.cards{grid-template-columns:repeat(3,1fr)}}
+.card{border:1.5px solid var(--ink);background:var(--paper);display:flex;flex-direction:column;transition:transform .25s ease,box-shadow .25s;will-change:transform}
+.card:hover{box-shadow:8px 8px 0 var(--red)}
+.ctop{display:flex;justify-content:space-between;align-items:center;padding:.6rem .9rem;border-bottom:1.5px solid var(--ink);font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase}
+.ctop b{color:var(--red);font-weight:400}
+.cbody{padding:1.1rem .9rem .5rem;display:flex;flex-direction:column;gap:.9rem;flex:1}
+.ctitle{font-family:var(--display);font-weight:900;text-transform:uppercase;font-size:clamp(1.55rem,2.8vw,2.3rem);line-height:.95;letter-spacing:-.045em;overflow-wrap:anywhere}
+.art{border:1px solid var(--ink);background:var(--paper2);aspect-ratio:3/2;overflow:hidden;position:relative}
+.art svg{width:100%;height:100%}
+.art .rd{transition:transform .5s cubic-bezier(.2,.8,.2,1);transform-origin:center;transform-box:fill-box}
+.card:hover .art .rd{transform:scale(1.18)}
+.cdesc{font-size:.92rem;line-height:1.6}
+.cfoot{display:flex;justify-content:space-between;gap:1rem;padding:.7rem .9rem;border-top:1.5px solid var(--ink);font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase}
+
+/* tilt bands */
+.tilt-sec{overflow:hidden;padding:clamp(30px,6vw,80px) 0;border-block:1.5px solid var(--ink)}
+.tilt{margin-inline:-6%;width:112%;transform:rotate(-3deg);border-block:2px solid var(--ink);padding:.2rem 0}
+.tilt.b{transform:rotate(2.5deg);margin-top:-1.2rem;background:var(--ink);color:var(--paper)}
+.tw{font-family:var(--display);font-weight:900;text-transform:uppercase;font-size:clamp(2.6rem,9vw,8rem);line-height:1.05;letter-spacing:-.05em;padding-inline:.3em;white-space:nowrap}
+.tw.rd{color:var(--red)}
+
+/* background (black) */
+.bg{background:var(--ink);color:var(--paper)}
+.bg .label::before{background:var(--red)}
+.steps{display:grid;grid-template-columns:1fr;gap:2.2rem;padding:0 var(--pad) clamp(40px,6vw,80px)}
+@media (min-width:900px){.steps{grid-template-columns:repeat(3,1fr);gap:2.6rem}}
+.step{border-top:1.5px solid var(--paper);padding-top:1.4rem;position:relative}
+.step::before{content:"";position:absolute;top:-7px;inset-inline-start:0;width:13px;height:13px;border-radius:50%;background:var(--red);box-shadow:0 0 0 5px var(--ink)}
+.step .tag{font-family:var(--mono);font-size:.7rem;letter-spacing:.16em;color:var(--red)}
+.step h3{font-family:var(--display);font-weight:900;text-transform:uppercase;font-size:clamp(1.8rem,3.4vw,2.8rem);line-height:1;letter-spacing:-.045em;margin:.5rem 0 1rem}
+.step p,.step li{font-family:var(--mono);font-size:.8rem;line-height:1.7;color:rgba(236,231,220,.88)}
+.step strong{color:var(--paper);display:block;font-size:.9rem}
+.step li{padding:.75rem 0;border-bottom:1px solid rgba(236,231,220,.25)}
+.step li:first-child{padding-top:0}
+.step li span{display:block;opacity:.8}
+
+/* experience */
+.exp{display:grid;grid-template-columns:1fr;gap:1.2rem;padding:0 var(--pad) clamp(40px,6vw,80px)}
+@media (min-width:800px){.exp{grid-template-columns:1fr 1fr}}
+.xp{border:1.5px solid var(--ink);padding:1.4rem;position:relative;overflow:hidden;transition:background .3s,color .3s}
+.xp:hover{background:var(--ink);color:var(--paper)}
+.xp .tag{display:inline-block;font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;background:var(--red);color:#fff;padding:.25em .7em}
+.xp h3{font-family:var(--display);font-weight:900;text-transform:uppercase;font-size:clamp(1.5rem,3vw,2.4rem);line-height:1;letter-spacing:-.045em;margin:1rem 0 .8rem;overflow-wrap:anywhere}
+.xp p{font-size:.95rem;max-width:34rem}
+.xp .big{position:absolute;inset-inline-end:-.1em;bottom:-.25em;font-family:var(--display);font-weight:900;font-size:7rem;line-height:1;opacity:.07;pointer-events:none}
+
+/* red block */
+.pi{display:grid;grid-template-columns:1fr;border-block:1.5px solid var(--ink)}
+@media (min-width:900px){.pi{grid-template-columns:minmax(0,.9fr) minmax(0,1.4fr)}}
+.pi-l{background:var(--red);color:var(--paper);padding:clamp(28px,4vw,56px) var(--pad);display:flex;flex-direction:column;justify-content:space-between;gap:2rem;position:relative;overflow:hidden}
+.pi-l h2{font-family:var(--display);font-weight:900;text-transform:uppercase;font-size:clamp(2.2rem,5.2vw,4.6rem);line-height:.95;letter-spacing:-.045em}
+.langs{font-family:var(--mono);font-size:.8rem;letter-spacing:.06em;line-height:1.9;border-top:1px solid rgba(236,231,220,.6);padding-top:1rem}
+.langs b{display:block;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;font-weight:400;opacity:.85}
+.pi-r{padding:0 var(--pad)}
+.srow{display:grid;grid-template-columns:3rem 1fr 2rem;align-items:center;gap:1rem;padding:1.15rem 0;border-bottom:1.5px solid var(--ink);transition:padding .3s,color .3s}
+.srow:last-child{border-bottom:0}
+.srow:hover{padding-inline-start:.8rem;color:var(--red)}
+.srow .n{font-family:var(--mono);font-size:.78rem;color:var(--red)}
+.srow .t{font-family:var(--display);font-weight:900;font-size:clamp(1.1rem,2.1vw,1.55rem);letter-spacing:-.03em;line-height:1.2}
+.srow:hover .pl{transform:rotate(90deg)}
+
+/* شايفك ابو يمان اللي بتقرا الكود */
+/* contact */
+.cta{padding:clamp(34px,5vw,70px) var(--pad) 0;overflow:hidden}
+.cta-grid{display:grid;grid-template-columns:1fr;gap:1.5rem;align-items:end}
+@media (min-width:900px){.cta-grid{grid-template-columns:1.5fr 1fr}}
+.cta .s{font-family:var(--display);font-weight:900;text-transform:uppercase;font-size:clamp(1.6rem,4.4vw,3.6rem);line-height:.95;letter-spacing:-.045em;display:block}
+.cta .bigw{display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.cta .b{font-family:var(--display);font-weight:900;text-transform:uppercase;color:var(--red);font-size:clamp(5.2rem,21vw,17rem);line-height:.82;letter-spacing:-.06em}
+html[lang="ar"] .cta .b{line-height:1.1}
+.arrow{width:clamp(60px,10vw,130px);color:var(--red);animation:nudge 1.6s ease-in-out infinite}
+html[dir="rtl"] .arrow{transform:scaleX(-1);animation-name:nudge2}
+@keyframes nudge{50%{transform:translate(-10px,10px)}}
+@keyframes nudge2{50%{transform:scaleX(-1) translate(-10px,10px)}}
+.cta-side{display:flex;flex-direction:column;gap:1rem;align-items:flex-start;padding-bottom:1rem}
+.cells{display:grid;grid-template-columns:1fr;border-top:1.5px solid var(--ink);margin-top:clamp(24px,4vw,50px)}
+@media (min-width:800px){.cells{grid-template-columns:repeat(3,1fr)}}
+.cell{padding:1.3rem var(--pad);border-bottom:1.5px solid var(--ink)}
+@media (min-width:800px){.cell{border-bottom:0;border-inline-end:1.5px solid var(--ink)}.cell:last-child{border-inline-end:0}}
+.cell .k{font-family:var(--mono);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--red);display:block;margin-bottom:.4rem}
+.cell a,.cell span.v{font-family:var(--display);font-weight:900;font-size:clamp(1rem,1.8vw,1.35rem);letter-spacing:-.02em;text-decoration:none;overflow-wrap:anywhere;word-break:break-word}
+.cell a:hover{color:var(--red);text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:4px}
+footer{background:var(--ink);color:var(--paper);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.8rem;padding:1.1rem var(--pad);font-family:var(--mono);font-size:.72rem;letter-spacing:.08em}
+footer a{text-decoration:none;border-bottom:1px solid var(--red)}
+footer a:hover{color:var(--red)}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none !important;transition:none !important}
+  html.js .rv{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main" data-i18n="skip">Skip to content</a>
+<div id="prog" aria-hidden="true"></div>
+<div id="cur" aria-hidden="true"></div>
+
+<!-- شايفك ابو يمان اللي بتقرا الكود -->
+<header class="hdr" id="hdr">
+  <a class="logo" href="#top" data-i18n-aria="name_full" aria-label="Mohammed Yaman Asaad"><span class="logo-mark">MY</span><span class="logo-dot"></span></a>
+  <nav id="nav" data-i18n-aria="nav_label" aria-label="Main">
+    <a href="#skills" data-i18n="nav_skills">Skills</a>
+    <a href="#about" data-i18n="nav_about">About</a>
+    <a href="#projects" data-i18n="nav_projects">Projects</a>
+    <a href="#background" data-i18n="nav_background">Background</a>
+    <a href="#experience" data-i18n="nav_experience">Experience</a>
+    <a href="#contact" data-i18n="nav_contact">Contact</a>
+  </nav>
+  <div class="lang" role="group" data-i18n-aria="lang_label" aria-label="Language">
+    <button type="button" data-lang="en" aria-pressed="true">EN</button>
+    <button type="button" data-lang="ar" aria-pressed="false" lang="ar">عربي</button>
+  </div>
+  <button class="burger" type="button" id="burger" aria-expanded="false" aria-controls="nav" data-i18n-aria="menu" aria-label="Menu"><span></span><span></span></button>
+</header>
+
+<main id="main">
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <span class="plus-m a" aria-hidden="true"></span>
+  <span class="ruler" aria-hidden="true"></span>
+  <span class="barcode" aria-hidden="true"></span>
+  <div class="hero-grid">
+    <div class="hero-text">
+      <p class="display">
+        <span data-i18n="hero_1">Build</span>
+        <span class="l2" data-i18n="hero_2">the next</span>
+        <span data-i18n="hero_3">system.</span>
+      </p>
+      <p class="hud mono">
+        <span data-i18n="hud_1">ASAAD SYSTEM / 001</span><br>
+        <span data-i18n="hud_2">SOFTWARE DEVELOPMENT</span><br>
+        <span data-i18n="hud_3">SYSTEM ANALYSIS + DESIGN</span><br>
+        <span class="blink" data-i18n="hud_4">STATUS: OPEN TO OPPORTUNITIES</span>
+      </p>
+      <p class="hero-sub" data-i18n="hero_sub">Computer Science graduate from Taibah University, combining a strong academic foundation with practical, hands-on experience.</p>
+      <div class="cta-row">
+        <a class="btn" href="#projects"><span data-i18n="btn_projects">View projects</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M3 12h17M14 6l6 6-6 6"/></svg></a>
+        <a class="btn ghost" href="#contact" data-i18n="btn_contact">Get in touch</a>
+      </div>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <svg viewBox="0 0 520 430" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="gF" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#b9b9b6"/><stop offset="1" stop-color="#7d7d7a"/></linearGradient>
+          <linearGradient id="gS" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#6c6c69"/><stop offset="1" stop-color="#4a4a48"/></linearGradient>
+          <linearGradient id="gT" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d4d4d0"/><stop offset="1" stop-color="#a5a5a1"/></linearGradient>
+          <filter id="blur"><feGaussianBlur stdDeviation="9"/></filter>
+          <pattern id="scan" width="4" height="4" patternUnits="userSpaceOnUse"><rect width="4" height="1" fill="#e4301c" opacity=".16"/></pattern>
+        </defs>
+        <ellipse cx="260" cy="388" rx="215" ry="16" fill="#e4301c" opacity=".85" filter="url(#blur)"/>
+        <rect x="70" y="330" width="330" height="40" fill="#5b5b59"/>
+        <polygon points="70,330 400,330 450,306 120,306" fill="url(#gT)"/>
+        <rect x="70" y="360" width="330" height="8" fill="#e4301c"/>
+        <polygon points="400,330 450,306 450,336 400,370" fill="#444"/>
+        <polygon points="90,70 380,70 440,40 150,40" fill="url(#gT)"/>
+        <polygon points="380,70 440,40 440,285 380,318" fill="url(#gS)"/>
+        <rect x="90" y="70" width="290" height="248" fill="url(#gF)"/>
+        <rect x="108" y="88" width="254" height="176" rx="6" fill="#140606" stroke="#2c2c2c" stroke-width="3"/>
+        <rect x="108" y="88" width="254" height="176" rx="6" fill="url(#scan)"/>
+        <g style="transform-origin:235px 176px;animation:spin 14s linear infinite" fill="none" stroke="#e4301c" stroke-width="1.4" opacity=".95">
+          <ellipse cx="235" cy="176" rx="70" ry="26"/><ellipse cx="235" cy="176" rx="70" ry="26" transform="rotate(60 235 176)"/><ellipse cx="235" cy="176" rx="70" ry="26" transform="rotate(120 235 176)"/><circle cx="235" cy="176" r="70" opacity=".4"/>
+        </g>
+        <text x="120" y="108" font-family="monospace" font-size="9" fill="#e4301c">ASAAD / 001</text>
+        <text x="120" y="254" font-family="monospace" font-size="9" fill="#e4301c" opacity=".8">JAVA · PYTHON · C/C++</text>
+        <g stroke="#555" stroke-width="2"><line x1="110" y1="282" x2="230" y2="282"/><line x1="110" y1="290" x2="230" y2="290"/><line x1="110" y1="298" x2="230" y2="298"/></g>
+        <rect x="262" y="278" width="86" height="22" fill="#4a4a48"/><rect x="268" y="286" width="74" height="5" fill="#222"/>
+        <circle cx="352" cy="289" r="4" fill="#e4301c"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- NAME BAND -->
+<!-- هذا الجزء كتبته الساعة ٣ الفجر وما اذكر ليش كتبته كذا -->
+<section class="band" aria-label="Name">
+  <h1 class="nameh"><span data-i18n="name_caps">Mohammed Yaman Asaad</span></h1>
+  <div class="mq" aria-hidden="true"><div class="trk"><div class="grp">
+    <span class="tk" data-i18n="tk_1">Computer Science Graduate</span>
+    <span class="tk red">/</span>
+    <span class="tk" data-i18n="tk_2">Medina, Saudi Arabia</span>
+    <span class="tk red">/</span>
+    <span class="tk" data-i18n="tk_3">Java · Python · C/C++</span>
+    <span class="tk red">/</span>
+    <span class="tk" data-i18n="tk_4">System Analysis &amp; Design</span>
+    <span class="tk red">/</span>
+  </div></div></div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" aria-labelledby="skills-h">
+  <div class="sec-head rv">
+    <span class="label" data-i18n="sk_label">01 / Technical skills</span>
+    <h2 class="h2" id="skills-h" data-i18n="sk_title">Tech stack</h2>
+  </div>
+  <ol class="rows">
+    <li class="row rv">
+      <span class="num">01<i>/</i></span>
+      <span class="ttl" data-i18n="s1_t">Languages</span>
+      <div class="dsc"><span data-i18n="s1_d">Programming languages</span>
+        <div class="chips"><span class="chip">Java</span><span class="chip">Python</span><span class="chip">C / C++</span></div></div>
+      <span class="code">SKL_01</span><span class="pl" aria-hidden="true"></span>
+    </li>
+    <li class="row rv">
+      <span class="num">02<i>/</i></span>
+      <span class="ttl" data-i18n="s2_t">Core concepts</span>
+      <div class="dsc"><span data-i18n="s2_d">Foundations and design methods</span>
+        <div class="chips">
+          <span class="chip" data-i18n="c_oop">OOP</span>
+          <span class="chip" data-i18n="c_dsa">Data Structures &amp; Algorithms</span>
+          <span class="chip" data-i18n="c_dld">Digital Logic Design</span>
+          <span class="chip" data-i18n="c_sad">System Analysis &amp; Design</span>
+          <span class="chip" data-i18n="c_arch">Software Architecture</span>
+          <span class="chip" data-i18n="c_uml">UML Modeling</span>
+        </div></div>
+      <span class="code">SKL_02</span><span class="pl" aria-hidden="true"></span>
+    </li>
+    <li class="row rv">
+      <span class="num">03<i>/</i></span>
+      <span class="ttl" data-i18n="s3_t">Tools &amp; IDEs</span>
+      <div class="dsc"><span data-i18n="s3_d">Development environments and office tools</span>
+        <div class="chips"><span class="chip">IntelliJ IDEA</span><span class="chip">Eclipse</span><span class="chip">NetBeans</span><span class="chip">MS Word</span><span class="chip">PowerPoint</span></div></div>
+      <span class="code">SKL_03</span><span class="pl" aria-hidden="true"></span>
+    </li>
+  </ol>
+</section>
+
+<!-- STATEMENT / ABOUT -->
+<section class="state" id="about" aria-labelledby="about-h">
+  <div class="state-grid">
+    <h2 class="shout rv" id="about-h" data-i18n-html="st_html">I don't just write code.<br>I design the <span class="r">system.</span></h2>
+    <div class="hudbox rv">
+      <div class="hl"><span data-i18n="hb_l">PROFILE / SUMMARY</span><span>MAP_01</span></div>
+      <p data-i18n="summary">Computer Science Bachelor's graduate combining a strong academic foundation with practical and creative experience. Solid background in software development honed through technical projects, alongside discipline, adaptability, and teamwork built through hands-on field experience. Seeking to leverage skills in a professional growth environment.</p>
+      <svg class="bp" viewBox="0 0 400 240" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+        <line x1="0" y1="120" x2="400" y2="120" opacity=".4"/><line x1="200" y1="0" x2="200" y2="240" opacity=".4"/>
+        <circle cx="200" cy="120" r="96"/><circle cx="200" cy="120" r="66" opacity=".6"/><circle cx="200" cy="120" r="34" opacity=".6"/>
+        <g class="spin"><circle cx="200" cy="120" r="108" stroke-dasharray="3 7" stroke-width="1.5"/></g>
+        <g class="spin r"><circle cx="200" cy="120" r="80" stroke-dasharray="14 10" opacity=".7"/></g>
+        <path d="M30 200 C120 190 190 140 260 100 S350 40 380 30" stroke="#ece7dc" opacity=".8"/>
+        <circle cx="260" cy="100" r="5" fill="#e4301c" stroke="none"/>
+        <text x="14" y="18" font-family="monospace" font-size="9" fill="currentColor" stroke="none">24.4672° N</text>
+        <text x="14" y="232" font-family="monospace" font-size="9" fill="currentColor" stroke="none">39.6024° E</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats" aria-label="Highlights">
+  <div class="stat rv"><span class="snum"><span class="count" data-to="4.26" data-dec="2">4.26</span><small>/5</small></span><span class="slab" data-i18n="stat_1">GPA — Second-Class Honors</span></div>
+  <div class="stat rv"><span class="snum"><span class="count" data-to="100">100</span><small>/100</small></span><span class="slab" data-i18n="stat_2">Graduation project score</span></div>
+  <div class="stat rv"><span class="snum">#<span class="count" data-to="2">2</span></span><span class="slab" data-i18n="stat_3">Place — multi-university innovation hackathon</span></div>
+  <div class="stat rv"><span class="snum">~<span class="count" data-to="70">70</span><small>h</small></span><span class="slab" data-i18n="stat_4">Volunteer hours</span></div>
+</section>
+
+<!-- PROJECTS -->
+<!-- صدقني ما ادري كيف اشتغل ولكن دامه يشتغل اتركه -->
+<section id="projects" aria-labelledby="proj-h">
+  <div class="sec-head rv">
+    <span class="label" data-i18n="pj_label">02 / Academic projects</span>
+    <h2 class="h2" id="proj-h" data-i18n="pj_title">Selected projects</h2>
+  </div>
+  <div class="cards">
+    <article class="card rv">
+      <div class="ctop"><b>PROJECT_01</b><span data-i18n="p1_k">Graduation project</span></div>
+      <div class="cbody">
+        <h3 class="ctitle" data-i18n="p1_t">Legal services platform</h3>
+        <div class="art" aria-hidden="true">
+          <svg viewBox="0 0 240 160" fill="none" stroke="#0c0c0c" stroke-width="1.5">
+            <g opacity=".3"><path d="M0 40h240M0 80h240M0 120h240M60 0v160M120 0v160M180 0v160"/></g>
+            <circle class="rd" cx="120" cy="80" r="30" fill="#e4301c" stroke="none"/>
+            <circle cx="40" cy="60" r="12"/><path d="M20 108c0-14 9-22 20-22s20 8 20 22"/>
+            <circle cx="200" cy="60" r="12"/><path d="M180 108c0-14 9-22 20-22s20 8 20 22"/>
+            <path d="M54 80h36M150 80h36" stroke-dasharray="4 4"/>
+            <path d="M104 72h32M104 80h32M104 88h20" stroke="#ece7dc" stroke-width="2"/>
+          </svg>
+        </div>
+        <p class="cdesc" data-i18n="p1_d">An intermediary platform connecting lawyers and clients to streamline legal services. Presented to the university evaluation committee and scored 100/100.</p>
+      </div>
+      <div class="cfoot"><span data-i18n="p1_f">Platform design</span><span>2026</span></div>
+    </article>
+
+    <article class="card rv">
+      <div class="ctop"><b>PROJECT_02</b><span data-i18n="p2_k">University hackathon</span></div>
+      <div class="cbody">
+        <h3 class="ctitle" data-i18n="p2_t">Smart recycling bin</h3>
+        <div class="art" aria-hidden="true">
+          <svg viewBox="0 0 240 160" fill="none" stroke="#0c0c0c" stroke-width="1.5">
+            <g opacity=".3"><path d="M0 40h240M0 80h240M0 120h240M60 0v160M120 0v160M180 0v160"/></g>
+            <circle class="rd" cx="120" cy="82" r="46" fill="#e4301c" stroke="none"/>
+            <path d="M84 60h72l-7 84H91z" fill="#ece7dc"/><path d="M78 60h84M104 50h32v10h-32z" fill="#ece7dc"/>
+            <path d="M106 76l2 56M120 76v56M134 76l-2 56"/>
+            <circle cx="52" cy="40" r="5" fill="#0c0c0c"/><circle cx="190" cy="28" r="4"/><circle cx="196" cy="60" r="6" fill="#0c0c0c"/>
+            <path d="M52 48v26M190 36v14" stroke-dasharray="3 4"/>
+          </svg>
+        </div>
+        <p class="cdesc" data-i18n="p2_d">An intelligent recycling bin concept designed for a multi-university innovation competition. Achieved 2nd place among participating teams from other universities in Madinah.</p>
+      </div>
+      <div class="cfoot"><span data-i18n="p2_f">Concept design</span><span>2024</span></div>
+    </article>
+
+    <article class="card rv">
+      <div class="ctop"><b>PROJECT_03</b><span data-i18n="p3_k">Course projects</span></div>
+      <div class="cbody">
+        <h3 class="ctitle" data-i18n="p3_t">Traffic light controller &amp; JavaFX apps</h3>
+        <div class="art" aria-hidden="true">
+          <svg viewBox="0 0 240 160" fill="none" stroke="#0c0c0c" stroke-width="1.5">
+            <g opacity=".3"><path d="M0 40h240M0 80h240M0 120h240M60 0v160M120 0v160M180 0v160"/></g>
+            <rect x="50" y="18" width="52" height="124" rx="8" fill="#0c0c0c"/>
+            <circle class="rd" cx="76" cy="46" r="15" fill="#e4301c" stroke="none"/>
+            <circle cx="76" cy="80" r="15" stroke="#ece7dc"/><circle cx="76" cy="114" r="15" stroke="#ece7dc"/>
+            <path d="M102 46h40v-20h50M102 80h90M102 114h40v24h50" />
+            <rect x="188" y="18" width="14" height="14" fill="#0c0c0c"/><rect x="188" y="73" width="14" height="14" fill="#e4301c" stroke="none"/><rect x="188" y="131" width="14" height="14" fill="#0c0c0c"/>
+          </svg>
+        </div>
+        <p class="cdesc" data-i18n="p3_d">Independently built a digital circuit simulating traffic light control (Digital Logic Design), and developed a desktop bookstore application in JavaFX that simulates an inventory system.</p>
+      </div>
+      <div class="cfoot"><span data-i18n="p3_f">JavaFX · Digital logic</span><span data-i18n="p3_y">Academic</span></div>
+    </article>
+  </div>
+</section>
+
+<!-- TILTED BANDS -->
+<section class="tilt-sec" aria-hidden="true">
+  <div class="tilt a"><div class="mq fast"><div class="trk"><div class="grp">
+    <span class="tw" data-i18n="w_1">Code</span><span class="tw" data-i18n="w_2">Design</span><span class="tw rd" data-i18n="w_3">Analyze</span><span class="tw" data-i18n="w_4">Build</span>
+  </div></div></div></div>
+  <div class="tilt b"><div class="mq rev"><div class="trk"><div class="grp">
+    <span class="tw" data-i18n="w_4">Build</span><span class="tw rd" data-i18n="w_1">Code</span><span class="tw" data-i18n="w_3">Analyze</span><span class="tw" data-i18n="w_2">Design</span>
+  </div></div></div></div>
+</section>
+
+<!-- BACKGROUND -->
+<section class="bg" id="background" aria-labelledby="bg-h">
+  <div class="sec-head rv">
+    <span class="label" data-i18n="bg_label">03 / Background — 3 parts</span>
+    <h2 class="h2" id="bg-h" data-i18n="bg_title">Background</h2>
+  </div>
+  <div class="steps">
+    <div class="step rv">
+      <span class="tag">01</span>
+      <h3 data-i18n="b1_t">Education</h3>
+      <p><strong data-i18n="b1_a">Bachelor of Computer Science</strong>
+        <span data-i18n="b1_b">Taibah University, Saudi Arabia</span><br>
+        <span data-i18n="b1_c">Graduated: June 2026</span><br>
+        <span data-i18n="b1_d">GPA: 4.26 / 5.00 — Second-Class Honors</span></p>
+    </div>
+    <div class="step rv">
+      <span class="tag">02</span>
+      <h3 data-i18n="b2_t">Training</h3>
+      <ul>
+        <li><strong data-i18n="t1_a">AI for Smart Cities Program (2 Weeks)</strong><span data-i18n="t1_b">Microsoft &amp; Taibah Univ. | 2025</span></li>
+        <li><strong data-i18n="t2_a">University Innovation Hackathon (16 Hours)</strong><span data-i18n="t2_b">Taibah Univ. | 2024</span></li>
+        <li><strong data-i18n="t3_a">Introduction to Cybersecurity (3 Days)</strong><span data-i18n="t3_b">Cyber Security Club | 2024</span></li>
+        <li><strong data-i18n="t4_a">Competitive Programming Workshop (6 Hours)</strong><span data-i18n="t4_b">Taibah Univ. | 2024</span></li>
+      </ul>
+    </div>
+    <div class="step rv">
+      <span class="tag">03</span>
+      <h3 data-i18n="b3_t">Volunteering</h3>
+      <p><strong data-i18n="b3_a">Active Volunteer</strong>
+        <span data-i18n="b3_b">Completed ~70 hours of volunteer work in university and community initiatives.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" aria-labelledby="exp-h">
+  <div class="sec-head rv">
+    <span class="label" data-i18n="ex_label">04 / Practical experience</span>
+    <h2 class="h2" id="exp-h" data-i18n="ex_title">Hands-on experience</h2>
+  </div>
+  <div class="exp">
+    <article class="xp rv">
+      <span class="tag" data-i18n="x1_k">Freelance</span>
+      <h3 data-i18n="x1_t">Photography &amp; video editing</h3>
+      <p data-i18n="x1_d">Worked collaboratively with a media team on photography assignments.</p>
+      <span class="big" aria-hidden="true">01</span>
+    </article>
+    <article class="xp rv">
+      <span class="tag" data-i18n="x2_k">Part-time</span>
+      <h3 data-i18n="x2_t">Air conditioning &amp; refrigeration maintenance</h3>
+      <p data-i18n="x2_d">Gained long-term, continuous hands-on experience in air conditioning and refrigeration maintenance while balancing academic studies.</p>
+      <span class="big" aria-hidden="true">02</span>
+    </article>
+  </div>
+</section>
+
+<!-- BEYOND CODE -->
+<section class="pi" aria-labelledby="pi-h">
+  <div class="pi-l">
+    <h2 id="pi-h" data-i18n="pi_t">Skills beyond code.</h2>
+    <div class="langs">
+      <b data-i18n="lg_l">Languages</b>
+      <span data-i18n="lg_1">Arabic — Native</span><br>
+      <span data-i18n="lg_2">English — Upper-Intermediate</span>
+    </div>
+  </div>
+  <ul class="pi-r">
+    <li class="srow rv"><span class="n">01</span><span class="t" data-i18n="ss_1">Time Management &amp; Prioritization</span><span class="pl" aria-hidden="true"></span></li>
+    <li class="srow rv"><span class="n">02</span><span class="t" data-i18n="ss_2">Self-Discipline &amp; Commitment</span><span class="pl" aria-hidden="true"></span></li>
+    <li class="srow rv"><span class="n">03</span><span class="t" data-i18n="ss_3">Analytical &amp; Research Skills</span><span class="pl" aria-hidden="true"></span></li>
+    <li class="srow rv"><span class="n">04</span><span class="t" data-i18n="ss_4">Problem-Solving under Pressure</span><span class="pl" aria-hidden="true"></span></li>
+    <li class="srow rv"><span class="n">05</span><span class="t" data-i18n="ss_5">Customer Communication</span><span class="pl" aria-hidden="true"></span></li>
+    <li class="srow rv"><span class="n">06</span><span class="t" data-i18n="ss_6">Teamwork &amp; Collaboration</span><span class="pl" aria-hidden="true"></span></li>
+  </ul>
+</section>
+
+<!-- CONTACT -->
+<section class="cta" id="contact" aria-labelledby="ct-h">
+  <div class="cta-grid">
+    <div class="rv">
+      <h2 id="ct-h" class="visually-hidden" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)" data-i18n="nav_contact">Contact</h2>
+      <span class="s" data-i18n="ct_1">Ready to</span>
+      <div class="bigw"><span class="b" data-i18n="ct_2">Build</span>
+        <svg class="arrow" viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><path d="M8 8l82 30-34 12 12 40-14 8-12-40L8 76z"/></svg></div>
+      <span class="s" data-i18n="ct_3">what matters?</span>
+    </div>
+    <div class="cta-side rv">
+      <a class="btn red" href="mailto:xyaman2004@gmail.com"><span data-i18n="ct_btn">Start a project</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M3 12h17M14 6l6 6-6 6"/></svg></a>
+      <a class="btn ghost" href="tel:+966502741638"><span data-i18n="ct_call">Call now</span></a>
+    </div>
+  </div>
+  <div class="cells">
+    <div class="cell"><span class="k" data-i18n="k_mail">Email</span><a class="ltr" href="mailto:xyaman2004@gmail.com">xyaman2004@gmail.com</a></div>
+    <div class="cell"><span class="k" data-i18n="k_phone">Phone</span><a class="ltr" href="tel:+966502741638">0502741638</a></div>
+    <div class="cell"><span class="k" data-i18n="k_loc">Location</span><span class="v" data-i18n="v_loc">Medina, Saudi Arabia</span></div>
+  </div>
+</section>
+</main>
+
+<!-- هنا يصير السحر.. او يمكن بس حظ، الله اعلم -->
+<footer>
+  <span data-i18n="ft_c">© 2026 Mohammed Yaman Asaad. All rights reserved.</span>
+  <a href="#top" data-i18n="ft_top">Back to top ↑</a>
+</footer>
+
+<script>
+(function(){
+'use strict';
+document.documentElement.classList.add('js');
+
+var T={
+en:{
+skip:'Skip to content',name_full:'Mohammed Yaman Asaad',nav_label:'Main navigation',lang_label:'Language',menu:'Menu',
+nav_skills:'Skills',nav_about:'About',nav_projects:'Projects',nav_background:'Background',nav_experience:'Experience',nav_contact:'Contact',
+doc_title:'Mohammed Yaman Asaad — Computer Science Graduate',
+doc_desc:'Portfolio of Mohammed Yaman Asaad, Computer Science graduate from Taibah University, Medina. Java, Python, C/C++, system analysis and software architecture.',
+hero_1:'Build',hero_2:'the next',hero_3:'system.',
+hud_1:'ASAAD SYSTEM / 001',hud_2:'SOFTWARE DEVELOPMENT',hud_3:'SYSTEM ANALYSIS + DESIGN',hud_4:'STATUS: OPEN TO OPPORTUNITIES',
+hero_sub:'Computer Science graduate from Taibah University, combining a strong academic foundation with practical, hands-on experience.',
+btn_projects:'View projects',btn_contact:'Get in touch',
+name_caps:'Mohammed Yaman Asaad',
+tk_1:'Computer Science Graduate',tk_2:'Medina, Saudi Arabia',tk_3:'Java · Python · C/C++',tk_4:'System Analysis & Design',
+sk_label:'01 / Technical skills',sk_title:'Tech stack',
+s1_t:'Languages',s1_d:'Programming languages',
+s2_t:'Core concepts',s2_d:'Foundations and design methods',
+c_oop:'OOP',c_dsa:'Data Structures & Algorithms',c_dld:'Digital Logic Design',c_sad:'System Analysis & Design',c_arch:'Software Architecture',c_uml:'UML Modeling',
+s3_t:'Tools & IDEs',s3_d:'Development environments and office tools',
+st_html:'I don\'t just write code.<br>I design the <span class="r">system.</span>',
+hb_l:'PROFILE / SUMMARY',
+summary:'Computer Science Bachelor\'s graduate combining a strong academic foundation with practical and creative experience. Solid background in software development honed through technical projects, alongside discipline, adaptability, and teamwork built through hands-on field experience. Seeking to leverage skills in a professional growth environment.',
+stat_1:'GPA — Second-Class Honors',stat_2:'Graduation project score',stat_3:'Place — multi-university innovation hackathon',stat_4:'Volunteer hours',
+pj_label:'02 / Academic projects',pj_title:'Selected projects',
+p1_k:'Graduation project',p1_t:'Legal services platform',p1_d:'An intermediary platform connecting lawyers and clients to streamline legal services. Presented to the university evaluation committee and scored 100/100.',p1_f:'Platform design',
+p2_k:'University hackathon',p2_t:'Smart recycling bin',p2_d:'An intelligent recycling bin concept designed for a multi-university innovation competition. Achieved 2nd place among participating teams from other universities in Madinah.',p2_f:'Concept design',
+p3_k:'Course projects',p3_t:'Traffic light controller & JavaFX apps',p3_d:'Independently built a digital circuit simulating traffic light control (Digital Logic Design), and developed a desktop bookstore application in JavaFX that simulates an inventory system.',p3_f:'JavaFX · Digital logic',p3_y:'Academic',
+w_1:'Code',w_2:'Design',w_3:'Analyze',w_4:'Build',
+bg_label:'03 / Background — 3 parts',bg_title:'Background',
+b1_t:'Education',b1_a:'Bachelor of Computer Science',b1_b:'Taibah University, Saudi Arabia',b1_c:'Graduated: June 2026',b1_d:'GPA: 4.26 / 5.00 — Second-Class Honors',
+b2_t:'Training',
+t1_a:'AI for Smart Cities Program (2 Weeks)',t1_b:'Microsoft & Taibah Univ. | 2025',
+t2_a:'University Innovation Hackathon (16 Hours)',t2_b:'Taibah Univ. | 2024',
+t3_a:'Introduction to Cybersecurity (3 Days)',t3_b:'Cyber Security Club | 2024',
+t4_a:'Competitive Programming Workshop (6 Hours)',t4_b:'Taibah Univ. | 2024',
+b3_t:'Volunteering',b3_a:'Active Volunteer',b3_b:'Completed ~70 hours of volunteer work in university and community initiatives.',
+ex_label:'04 / Practical experience',ex_title:'Hands-on experience',
+x1_k:'Freelance',x1_t:'Photography & video editing',x1_d:'Worked collaboratively with a media team on photography assignments.',
+x2_k:'Part-time',x2_t:'Air conditioning & refrigeration maintenance',x2_d:'Gained long-term, continuous hands-on experience in air conditioning and refrigeration maintenance while balancing academic studies.',
+pi_t:'Skills beyond code.',lg_l:'Languages',lg_1:'Arabic — Native',lg_2:'English — Upper-Intermediate',
+ss_1:'Time Management & Prioritization',ss_2:'Self-Discipline & Commitment',ss_3:'Analytical & Research Skills',ss_4:'Problem-Solving under Pressure',ss_5:'Customer Communication',ss_6:'Teamwork & Collaboration',
+ct_1:'Ready to',ct_2:'Build',ct_3:'what matters?',ct_btn:'Start a project',ct_call:'Call now',
+k_mail:'Email',k_phone:'Phone',k_loc:'Location',v_loc:'Medina, Saudi Arabia',
+ft_c:'© 2026 Mohammed Yaman Asaad. All rights reserved.',ft_top:'Back to top ↑'
+},
+ar:{
+skip:'تخطَّ إلى المحتوى',name_full:'محمد يمان أسعد',nav_label:'التنقل الرئيسي',lang_label:'اللغة',menu:'القائمة',
+nav_skills:'المهارات',nav_about:'نبذة',nav_projects:'المشاريع',nav_background:'الخلفية',nav_experience:'الخبرة',nav_contact:'تواصل',
+doc_title:'محمد يمان أسعد — خريج علوم الحاسب',
+doc_desc:'الموقع الشخصي لمحمد يمان أسعد، خريج علوم الحاسب من جامعة طيبة بالمدينة المنورة. Java وPython وC/C++ وتحليل النظم وهندسة البرمجيات.',
+hero_1:'ابنِ',hero_2:'النظام',hero_3:'القادم.',
+hud_1:'نظام أسعد / 001',hud_2:'تطوير البرمجيات',hud_3:'تحليل وتصميم النظم',hud_4:'الحالة: متاح للفرص',
+hero_sub:'خريج علوم الحاسب من جامعة طيبة، يجمع بين أساس أكاديمي قوي وخبرة عملية ميدانية.',
+btn_projects:'استعرض المشاريع',btn_contact:'تواصل معي',
+name_caps:'محمد يمان أسعد',
+tk_1:'خريج علوم الحاسب',tk_2:'المدينة المنورة، السعودية',tk_3:'Java · Python · C/C++',tk_4:'تحليل وتصميم النظم',
+sk_label:'01 / المهارات التقنية',sk_title:'التقنيات',
+s1_t:'اللغات',s1_d:'لغات البرمجة',
+s2_t:'المفاهيم الأساسية',s2_d:'الأسس ومنهجيات التصميم',
+c_oop:'البرمجة كائنية التوجه',c_dsa:'هياكل البيانات والخوارزميات',c_dld:'تصميم المنطق الرقمي',c_sad:'تحليل وتصميم النظم',c_arch:'هيكلية البرمجيات',c_uml:'نمذجة UML',
+s3_t:'الأدوات وبيئات التطوير',s3_d:'بيئات التطوير وأدوات المكتب',
+st_html:'لا أكتب الكود فحسب.<br>أنا أصمّم <span class="r">النظام.</span>',
+hb_l:'الملف الشخصي / نبذة',
+summary:'خريج بكالوريوس علوم الحاسب يجمع بين أساس أكاديمي قوي وخبرة عملية وإبداعية. أمتلك خلفية متينة في تطوير البرمجيات صقلتها المشاريع التقنية، إضافةً إلى الانضباط والقدرة على التكيّف والعمل الجماعي التي اكتسبتها من الخبرة الميدانية. أتطلع إلى توظيف مهاراتي في بيئة مهنية تدعم النمو.',
+stat_1:'المعدل التراكمي — مرتبة الشرف الثانية',stat_2:'درجة مشروع التخرج',stat_3:'المركز — هاكاثون ابتكار بين عدة جامعات',stat_4:'ساعة تطوعية',
+pj_label:'02 / المشاريع الأكاديمية',pj_title:'مشاريع مختارة',
+p1_k:'مشروع التخرج',p1_t:'منصة الخدمات القانونية',p1_d:'منصة وسيطة تربط المحامين بالعملاء لتسهيل الخدمات القانونية. قُدّمت إلى لجنة التقييم في الجامعة وحصلت على 100/100.',p1_f:'تصميم المنصة',
+p2_k:'هاكاثون الجامعة',p2_t:'حاوية إعادة التدوير الذكية',p2_d:'فكرة حاوية إعادة تدوير ذكية صُمّمت لمسابقة ابتكار شاركت فيها عدة جامعات. حقق المشروع المركز الثاني بين الفرق المشاركة من الجامعات الأخرى في المدينة المنورة.',p2_f:'تصميم المفهوم',
+p3_k:'مشاريع المقررات',p3_t:'متحكم إشارة المرور وتطبيقات JavaFX',p3_d:'بنيتُ بشكل مستقل دارة رقمية تحاكي التحكم بإشارة المرور (مقرر تصميم المنطق الرقمي)، وطوّرتُ تطبيق مكتبة لسطح المكتب بواسطة JavaFX يحاكي نظام المخزون.',p3_f:'JavaFX · المنطق الرقمي',p3_y:'أكاديمي',
+w_1:'برمجة',w_2:'تصميم',w_3:'تحليل',w_4:'بناء',
+bg_label:'03 / الخلفية — ٣ أجزاء',bg_title:'الخلفية',
+b1_t:'التعليم',b1_a:'بكالوريوس علوم الحاسب',b1_b:'جامعة طيبة، المملكة العربية السعودية',b1_c:'التخرج: يونيو 2026',b1_d:'المعدل التراكمي: 4.26 / 5.00 — مرتبة الشرف الثانية',
+b2_t:'التدريب',
+t1_a:'برنامج الذكاء الاصطناعي للمدن الذكية (أسبوعان)',t1_b:'مايكروسوفت وجامعة طيبة | 2025',
+t2_a:'هاكاثون الابتكار الجامعي (16 ساعة)',t2_b:'جامعة طيبة | 2024',
+t3_a:'مقدمة في الأمن السيبراني (3 أيام)',t3_b:'نادي الأمن السيبراني | 2024',
+t4_a:'ورشة البرمجة التنافسية (6 ساعات)',t4_b:'جامعة طيبة | 2024',
+b3_t:'التطوع',b3_a:'متطوع نشط',b3_b:'أكملتُ نحو 70 ساعة من العمل التطوعي في مبادرات جامعية ومجتمعية.',
+ex_label:'04 / الخبرة العملية',ex_title:'خبرة ميدانية',
+x1_k:'عمل حر',x1_t:'التصوير وتحرير الفيديو',x1_d:'عملتُ ضمن فريق إعلامي على مهام التصوير الفوتوغرافي.',
+x2_k:'دوام جزئي',x2_t:'صيانة أجهزة التكييف والتبريد',x2_d:'اكتسبتُ خبرة عملية طويلة ومستمرة في صيانة التكييف والتبريد بالتوازي مع دراستي الأكاديمية.',
+pi_t:'مهارات تتجاوز الكود.',lg_l:'اللغات',lg_1:'العربية — لغة أم',lg_2:'الإنجليزية — فوق المتوسط',
+ss_1:'إدارة الوقت وترتيب الأولويات',ss_2:'الانضباط الذاتي والالتزام',ss_3:'مهارات التحليل والبحث',ss_4:'حل المشكلات تحت الضغط',ss_5:'التواصل مع العملاء',ss_6:'العمل الجماعي والتعاون',
+ct_1:'هيا بنا',ct_2:'نبني',ct_3:'ما يهم؟',ct_btn:'ابدأ مشروعًا',ct_call:'اتصل الآن',
+k_mail:'البريد الإلكتروني',k_phone:'الهاتف',k_loc:'الموقع',v_loc:'المدينة المنورة، المملكة العربية السعودية',
+ft_c:'© 2026 محمد يمان أسعد. جميع الحقوق محفوظة.',ft_top:'العودة للأعلى ↑'
+}
+};
+
+var root=document.documentElement, cur='en';
+
+function tr(scope,lang){
+  var d=T[lang], q;
+  q=scope.querySelectorAll('[data-i18n]');
+  for(var i=0;i<q.length;i++){var k=q[i].getAttribute('data-i18n'); if(d[k]!==undefined) q[i].textContent=d[k];}
+  q=scope.querySelectorAll('[data-i18n-html]');
+  for(i=0;i<q.length;i++){k=q[i].getAttribute('data-i18n-html'); if(d[k]!==undefined) q[i].innerHTML=d[k];}
+  q=scope.querySelectorAll('[data-i18n-aria]');
+  for(i=0;i<q.length;i++){k=q[i].getAttribute('data-i18n-aria'); if(d[k]!==undefined) q[i].setAttribute('aria-label',d[k]);}
+}
+
+var mqs=[];
+function setupMq(mq){
+  var trk=mq.querySelector('.trk'), g1=trk.querySelector('.grp');
+  var base=[].slice.call(g1.children).map(function(n){return n.cloneNode(true);});
+  var g2=g1.cloneNode(true); g2.setAttribute('aria-hidden','true'); trk.appendChild(g2);
+  mq._fill=function(){
+    var n=0;
+    while(g1.scrollWidth<window.innerWidth*1.3 && n<40){
+      base.forEach(function(b){g1.appendChild(b.cloneNode(true));g2.appendChild(b.cloneNode(true));});
+      n++;
+    }
+    tr(mq,cur);
+  };
+  mqs.push(mq);
+}
+function fillAll(){mqs.forEach(function(m){m._fill();});}
+
+// لو لقيت غلط فيه تجاهله، هو نفسه ما يدري انه غلط
+function setLang(lang){
+  if(!T[lang]) lang='en';
+  cur=lang;
+  root.lang=lang; root.dir=lang==='ar'?'rtl':'ltr';
+  tr(document,lang);
+  document.title=T[lang].doc_title;
+  var m=document.querySelector('meta[name="description"]'); if(m) m.setAttribute('content',T[lang].doc_desc);
+  [].forEach.call(document.querySelectorAll('.lang button'),function(b){b.setAttribute('aria-pressed',b.getAttribute('data-lang')===lang?'true':'false');});
+  try{localStorage.setItem('lang',lang);}catch(e){}
+  fillAll();
+}
+
+[].forEach.call(document.querySelectorAll('.mq'),setupMq);
+[].forEach.call(document.querySelectorAll('.lang button'),function(b){
+  b.addEventListener('click',function(){setLang(b.getAttribute('data-lang'));});
+});
+
+var saved=null; try{saved=localStorage.getItem('lang');}catch(e){}
+var init=saved||((navigator.language||'en').toLowerCase().indexOf('ar')===0?'ar':'en');
+setLang(init);
+window.addEventListener('load',fillAll);
+// اذا حبيت تعدل شي، ادعي ربك قبل لا تحفظ
+var rt; window.addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(fillAll,200);});
+
+/* menu */
+var hdr=document.getElementById('hdr'), burger=document.getElementById('burger');
+function closeMenu(){hdr.classList.remove('open');burger.setAttribute('aria-expanded','false');}
+burger.addEventListener('click',function(){var o=hdr.classList.toggle('open');burger.setAttribute('aria-expanded',o?'true':'false');});
+[].forEach.call(document.querySelectorAll('#nav a'),function(a){a.addEventListener('click',closeMenu);});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMenu();});
+
+/* progress */
+var prog=document.getElementById('prog');
+function onScroll(){
+  var h=document.documentElement.scrollHeight-window.innerHeight;
+  prog.style.transform='scaleX('+(h>0?Math.min(1,window.scrollY/h):0)+')';
+}
+window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+
+/* reveal + counters */
+var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+// شغال ها ، حاول تفهم هههههههههه
+function count(el){
+  var to=parseFloat(el.getAttribute('data-to')), dec=parseInt(el.getAttribute('data-dec')||'0',10);
+  if(reduce){el.textContent=to.toFixed(dec);return;}
+  var t0=null,dur=1300;
+  function step(t){
+    if(t0===null)t0=t; var p=Math.min(1,(t-t0)/dur), e=1-Math.pow(1-p,3);
+    el.textContent=(to*e).toFixed(dec);
+    if(p<1)requestAnimationFrame(step); else el.textContent=to.toFixed(dec);
+  }
+  requestAnimationFrame(step);
+}
+var rvs=document.querySelectorAll('.rv');
+if('IntersectionObserver' in window){
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.classList.add('in'); io.unobserve(e.target);
+        [].forEach.call(e.target.querySelectorAll('.count'),count);
+      }
+    });
+  },{threshold:.12,rootMargin:'0px 0px -5% 0px'});
+  [].forEach.call(rvs,function(el,i){el.style.transitionDelay=(i%3)*90+'ms';io.observe(el);});
+}else{
+  [].forEach.call(rvs,function(el){el.classList.add('in');});
+  [].forEach.call(document.querySelectorAll('.count'),count);
+}
+
+/* cursor + tilt (mouse only) */
+var fine=window.matchMedia&&window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+if(fine&&!reduce){
+  var cu=document.getElementById('cur'), x=0,y=0,cx=0,cy=0,on=false;
+  window.addEventListener('mousemove',function(e){x=e.clientX;y=e.clientY;if(!on){on=true;cx=x;cy=y;cu.style.opacity='1';}});
+  document.addEventListener('mouseleave',function(){cu.style.opacity='0';on=false;});
+  (function loop(){cx+=(x-cx)*.2;cy+=(y-cy)*.2;cu.style.transform='translate('+cx+'px,'+cy+'px)';requestAnimationFrame(loop);})();
+  [].forEach.call(document.querySelectorAll('a,button,.row,.xp,.card'),function(el){
+    el.addEventListener('mouseenter',function(){cu.classList.add('big');});
+    el.addEventListener('mouseleave',function(){cu.classList.remove('big');});
+  });
+  [].forEach.call(document.querySelectorAll('.card'),function(c){
+    c.addEventListener('mousemove',function(e){
+      var r=c.getBoundingClientRect(), px=(e.clientX-r.left)/r.width-.5, py=(e.clientY-r.top)/r.height-.5;
+      c.style.transform='perspective(900px) rotateX('+(-py*5)+'deg) rotateY('+(px*5)+'deg) translateY(-6px)';
+    });
+    c.addEventListener('mouseleave',function(){c.style.transform='';});
+  });
+}
+})();
+</script>
+</body>
+</html>
